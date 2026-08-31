@@ -17,12 +17,18 @@ CORE CONCEPTS & TOOLS:
   rather than older legacy documentation pages
 
 CREATING A PROJECT (Two Methods):
-- Method 1 (Classic): 'npx create-react-app <name>' uses a bulky 
-  utility that installs a massive 'node_modules' folder, performance trackers, 
-  and testing libraries by default, making it very slow
-- Method 2 (Modern): 'npm create vite@latest <name>' uses the Vite 
-  bundler It is significantly faster, lightweight, and requires 
-  you to manually run 'npm install' to fetch the node modules afterward
+Method 1: The Classic Way (create-react-app)
+- Command: npx create-react-app 01basicreact
+- Run: cd 01basicreact -> npm run start
+- Note: This utility is bulky, time-consuming, and installs 
+   heavy, unnecessary testing libraries by default.
+
+Method 2: The Modern Way (Vite)
+- Command: npm create vite@latest
+- Prompts: Name it '01vitereact', select 'React', select 'JavaScript'.
+- Run: cd 01vitereact -> npm install -> npm run dev
+- Note: A lightning-fast bundler that generates a lightweight 
+   environment without pre-installing node_modules
 
 FILE STRUCTURE & SCRIPTS:
 - 'package.json': The primary entry point to understand any project, containing 
