@@ -1,7 +1,14 @@
 
+import Car from "./car"
+
 function App() {
   return (
-    <h1>Hello World, My Name is Pratik</h1>
+    <>
+      <Car />
+      <h3>Porsche</h3>
+      <p>911 GT3 RS</p>
+    </>
+    
   )
 }
 
