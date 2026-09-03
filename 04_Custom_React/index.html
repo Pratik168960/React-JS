@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom React App</title>
+</head>
+<body>
+    <!-- 
+      THE INJECTION POINT:
+      This empty div is the core of a Single Page Application (SPA). 
+      Instead of writing HTML elements directly in this file, we leave this container completely empty. 
+      Our custom JavaScript engine will target this 'root' ID and inject all UI elements inside it dynamically.
+    -->
+    <div id="root"></div>
+
+    <!-- 
+      THE ENGINE LINK:
+      Browsers only understand HTML, CSS, and standard JavaScript.
+      We must manually link our custom rendering engine (customreact.js) here so the browser executes our DOM manipulation code.
+    -->
+    <script src="./customreact.js"></script>
+</body>
+</html>
