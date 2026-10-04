@@ -1,0 +1,9 @@
+/* INITIAL VITE CSS (Removed): */
+/* :root { ... } */
+/* a { ... } */
+/* body { ... } */
+
+/* FINAL CODE: */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
