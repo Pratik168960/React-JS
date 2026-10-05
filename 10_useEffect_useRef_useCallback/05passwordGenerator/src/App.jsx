@@ -42,8 +42,9 @@ function App() {
 
   // STEP 3: Using useEffect to call the generator function on initial load and whenever dependencies change
   useEffect(() => {
-    passwordGenerator()
-  }, [length, numberAllowed, charAllowed, passwordGenerator])
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  passwordGenerator()
+}, [length, numberAllowed, charAllowed, passwordGenerator])
 
   return (
     // STEP 6: Building the Tailwind UI
