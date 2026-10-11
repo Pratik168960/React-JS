@@ -10,8 +10,7 @@ import User from './components/User/User.jsx'
 import Github, { githubInfoLoader } from './components/Github/Github.jsx'
 
 /* 
-// STEP 1 (Removed): The Array of Objects approach for routing.
-// Some developers prefer this, but it can get visually complex with deep nesting.
+// STEP 1 (Removed): The Array of Objects approach for routing
 const router = createBrowserRouter([
   {
     path: '/',
@@ -25,8 +24,7 @@ const router = createBrowserRouter([
 ])
 */
 
-// FINAL CODE: The JSX approach using createRoutesFromElements. 
-// Highly readable and preferred for nested routes[cite: 5].
+// FINAL CODE: The JSX approach using createRoutesFromElements (Tutor's preferred, more readable syntax)
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<Layout />}>
@@ -34,21 +32,23 @@ const router = createBrowserRouter(
       <Route path='about' element={<About />} />
       <Route path='contact' element={<Contact />} />
       
-      {/* TUTOR IMPORTANT NOTE: Dynamic parameter capture using :userid[cite: 5] */}
+      {/* NOTE: Capture dynamic parameters from the URL using :userid */}
       <Route path='user/:userid' element={<User />} />
       
-      {/* TUTOR IMPORTANT NOTE: Using the loader for optimized API fetching[cite: 5] */}
+      {/* NOTE: Use the loader property to highly optimize API data fetching */}
       <Route 
-      loader={githubInfoLoader}
-      path='github' 
-      element={<Github />}
-       />
+        loader={githubInfoLoader} // if we have to fetch some data  from any api or from database anything so we can directly do api calls from here data fetching gets started before the useEffect as our cursor goes on it before clicking it and store it in cache 
+        path='github' 
+        element={<Github />}
+      />
     </Route>
   )
 )
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    {/* RouterProvider takes control of the app injection here, replacing the standard <App /> */}
     <RouterProvider router={router} />
+    {/* router provider is a wrapper where we have wrapped every route */}
   </React.StrictMode>,
 )
