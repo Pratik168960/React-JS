@@ -38,7 +38,7 @@ It takes strictly ordered parameters:
 1. Tag ('a')
 2. Props/Attributes ({href, target})
 3. Children ('click me...')
-4. Evaluated Expressions (anotherUser)[cite: 2]
+4. Evaluated Expressions (anotherUser)
  */
 const reactElement = React.createElement(
     'a',
