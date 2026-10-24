@@ -4,7 +4,7 @@ import './App.css'
 import authService from "./appwrite/auth"
 import {login, logout} from "./store/authSlice"
 import { Footer, Header } from './components'
-// import { Outlet } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 
 function App() {
   // Set loading to true immediately because we are going to make a network request to Appwrite on mount
@@ -34,7 +34,7 @@ function App() {
         <Header />
         <main>
         {/*  NOTE: Outlet will render dynamic routes later once React Router is configured */}
-        {/* TODO:  <Outlet /> */}
+        <Outlet />
         </main>
         <Footer />
       </div>
