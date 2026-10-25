@@ -23,7 +23,7 @@ function Signup() {
                 // Fetch the current user data
                 const userData = await authService.getCurrentUser()
                 // Update the Redux store
-                if(userData) dispatch(login(userData));
+                if(userData) dispatch(login({userData}));
                 // Redirect to homepage
                 navigate("/")
             }

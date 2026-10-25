@@ -28,7 +28,8 @@ function Login() {
                 // If login successful, fetch the user's details
                 const userData = await authService.getCurrentUser()
                 // If user details exist, dispatch to Redux to update the global state
-                if(userData) dispatch(authLogin(userData));
+                if (userData) dispatch(authLogin({ userData }));
+                
                 // Redirect user to the home page programmatically
                 navigate("/")
             }

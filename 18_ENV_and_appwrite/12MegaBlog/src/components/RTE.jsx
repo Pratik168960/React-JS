@@ -1,6 +1,7 @@
 import React from 'react'
 import {Editor } from '@tinymce/tinymce-react';
-import {Controller } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
+import conf from '../conf/conf.js';
 
 // NOTE: This component accepts 'control' from the parent form. 
 // 'control' is how react-hook-form manages state for complex external components like TinyMCE.
@@ -18,6 +19,7 @@ export default function RTE({name, control, label, defaultValue =""}) {
     control={control}
     render={({field: {onChange}}) => ( // tracking onChange event  inform me if there is any change on this field  with render 
         <Editor
+        apiKey={conf.tinymceApiKey}
         initialValue={defaultValue}
         init={{
             initialValue: defaultValue,

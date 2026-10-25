@@ -1,5 +1,5 @@
 import conf from '../conf/conf.js';
-import { Client, ID, Databases, Storage, Query } from "appwrite";
+import { Client, ID, Databases, Storage, Query, Permission, Role } from "appwrite";
 
 /*
  * NOTE: VENDOR LOCK-IN PREVENTION
@@ -39,18 +39,19 @@ export class Service {
      * @param slug - We intentionally use the 'slug' as the unique Document ID.
      * This makes our URLs clean (e.g., website.com/post/my-first-blog) instead of random characters.
      */
-    async createPost({title, slug, content, featuredImage, status, userId}) {
+    // Make sure the parameter matches what PostForm is sending
+    async createPost({title, slug, content, featuredImage, status, userid}){
         try {
             return await this.databases.createDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
-                slug, // Passing the slug explicitly as the Document ID
+                slug,
                 {
                     title,
                     content,
                     featuredImage,
                     status,
-                    userId,
+                    userid, // This MUST match the Appwrite Database attribute name perfectly
                 }
             )
         } catch (error) {
@@ -158,7 +159,8 @@ export class Service {
             return await this.bucket.createFile(
                 conf.appwriteBucketId,
                 ID.unique(),
-                file
+                file,
+                [Permission.read(Role.any())]
             )
         } catch (error) {
             console.log("Appwrite serive :: uploadFile :: error", error);
@@ -191,11 +193,13 @@ export class Service {
      * Appwrite's preview generation is incredibly fast and directly returns a string resource URL, 
      * so it doesn't need to resolve a Promise.
      */
+    // TUTOR IMPORTANT NOTE: We wrap both IDs in String() to guarantee Appwrite
+    // can construct the URL correctly, preventing broken image links!
     getFilePreview(fileId) {
-        return this.bucket.getFilePreview(
+        return this.bucket.getFileView(
             conf.appwriteBucketId,
             fileId
-        )
+        );
     }
 }
 

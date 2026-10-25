@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/incompatible-library */
 import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Input, RTE, Select } from "..";
@@ -33,7 +34,7 @@ export default function PostForm({ post }) {
 
             const dbPost = await appwriteService.updatePost(post.$id, {
                 ...data,
-                featuredImage: file ? file.$id : undefined,
+                featuredImage: file ? file.$id : post.featuredImage,
             });
 
             if (dbPost) {
@@ -49,8 +50,8 @@ export default function PostForm({ post }) {
                 const fileId = file.$id;
                 data.featuredImage = fileId;
                 
-                const dbPost = await appwriteService.createPost({ ...data, userId: userData.$id });
-
+                // TUTOR IMPORTANT NOTE: The attribute name here MUST exactly match the column name in your Appwrite Database Schema.
+                const dbPost = await appwriteService.createPost({ ...data, userid: userData?.$id });
                 if (dbPost) {
                     navigate(`/post/${dbPost.$id}`);
                 }

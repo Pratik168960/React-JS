@@ -12,10 +12,15 @@ export default function Post() {
 
     const userData = useSelector((state) => state.auth.userData);
 
+    // ADD THESE TWO LINES TO DEBUG:
+    console.log("APPWRITE POST DATA: ", post);
+    console.log("REDUX USER DATA: ", userData);
+
     // NOTE: Determine if the currently logged-in user is the original author of this post.
     // If they are, `isAuthor` is true, and they get to see the Edit/Delete buttons.
-    const isAuthor = post && userData ? post.userId === userData.$id : false;
-
+    // Change post.userId to post.userid
+    const isAuthor = post && userData ? post.userid === userData.$id : false;
+    
     useEffect(() => {
         if (slug) {
             appwriteService.getPost(slug).then((post) => {
@@ -35,6 +40,8 @@ export default function Post() {
         });
     };
 
+    // FATAL BUG REMOVED: The console.log asking for post.featuredImage was here, crashing the app before the ternary check.
+
     return post ? (
         <div className="py-8">
             <Container>
@@ -44,7 +51,7 @@ export default function Post() {
                         alt={post.title}
                         className="rounded-xl"
                     />
-
+                    
                     {isAuthor && (
                         <div className="absolute right-6 top-6">
                             <Link to={`/edit-post/${post.$id}`}>

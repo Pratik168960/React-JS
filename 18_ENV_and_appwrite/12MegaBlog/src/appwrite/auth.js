@@ -36,7 +36,7 @@ export class AuthService {
     async login({email, password}) {
         try {
             // NOTE: Do not use account.createSession, the correct modern method is createEmailSession (or createEmailPasswordSession in latest SDKs, but we used createEmailSession).}
-            return await this.account.createEmailSession(email, password);
+            return await this.account.createEmailPasswordSession(email, password);
         } catch (error) {
             throw error;
         }
@@ -47,7 +47,10 @@ export class AuthService {
         try {
             return await this.account.get();
         } catch (error) {
-            console.log("Appwrite serive :: getCurrentUser :: error", error);
+            // Appwrite returns 401 when there is no active session.
+            if (error?.code !== 401) {
+                console.error("Appwrite service :: getCurrentUser :: error", error);
+            }
         }
 
         // Fail-safe: if the try/catch fails or doesn't return, return null so the app knows there is no active user session.
